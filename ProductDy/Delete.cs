@@ -23,19 +23,12 @@ namespace ProductDy
             String constr = DatabaseConnect.connectionString;  // See DatabaseConnect Class in Form1.cs file- bottom
             SqlConnection con = new SqlConnection(constr);  // create the database connecting
 
-            String sel = "select * from Product";  // Create the SQL query to be executed
-            SqlDataAdapter Da = new SqlDataAdapter(sel, con); // Create the tableAdapter/ dataAdapter
-            DataSet ds = new DataSet();  // Need the Dataset to populate data from the table
-
-            Da.Fill(ds, "QueryResult_products"); // Lead query result in the dataset- given a table name 'QueryResult_products', a dataset can have multiple such table/query resutl
-
-            listBox1.DataSource = ds.Tables["QueryResult_products"];
-            listBox1.DisplayMember = "Description";
+            refreshListBox(con, "Description");
 
             con.Close();
         }
 
-        private void refreshListBox(SqlConnection con) 
+        private void refreshListBox(SqlConnection con, String dispMemb) 
         {
             String sel = "select * from Product";  // Create the SQL query to be executed
             SqlDataAdapter Da = new SqlDataAdapter(sel, con); // Create the tableAdapter/ dataAdapter
@@ -44,7 +37,7 @@ namespace ProductDy
             Da.Fill(ds, "QueryResult_products"); // Lead query result in the dataset- given a table name 'QueryResult_products', a dataset can have multiple such table/query resutl
 
             listBox1.DataSource = ds.Tables["QueryResult_products"];
-            listBox1.DisplayMember = "Description";
+            listBox1.DisplayMember = dispMemb;
         }
 
         private void bt_Click_delete(object sender, EventArgs e)
@@ -69,7 +62,7 @@ namespace ProductDy
                 con.Open(); // open the Database connection for insertion when done must close the connection to avoid issues
                 Int32 returnFlag = (Int32)cmd.ExecuteNonQuery(); // execute the query, the function returns 0 if the insertion unsuccessful
                 if (returnFlag > 0)
-                    refreshListBox(con);
+                    refreshListBox(con, "Description");
                 else
                     MessageBox.Show("Something went wrong");
 

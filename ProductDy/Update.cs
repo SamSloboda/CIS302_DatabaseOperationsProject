@@ -22,7 +22,24 @@ namespace ProductDy
         {
             // WRITE YOUR CODE HERE TO LOAD THE PRODUCT IDs IN THE GIVEN LIST BOX
 
-            MessageBox.Show(" Update form lead Method is not implemented");
+            String constr = DatabaseConnect.connectionString;  // See DatabaseConnect Class in Form1.cs file- bottom
+            SqlConnection con = new SqlConnection(constr);  // create the database connecting
+
+            refreshListBox(con, "Product_Number");
+
+            con.Close();
+        }
+
+        private void refreshListBox(SqlConnection con, String dispMemb)
+        {
+            String sel = "select * from Product";  // Create the SQL query to be executed
+            SqlDataAdapter Da = new SqlDataAdapter(sel, con); // Create the tableAdapter/ dataAdapter
+            DataSet ds = new DataSet();  // Need the Dataset to populate data from the table
+
+            Da.Fill(ds, "QueryResult_products"); // Lead query result in the dataset- given a table name 'QueryResult_products', a dataset can have multiple such table/query resutl
+
+            listBox1.DataSource = ds.Tables["QueryResult_products"];
+            listBox1.DisplayMember = dispMemb;
         }
 
         private void listBox1_MouseClick(object sender, MouseEventArgs e)
@@ -33,12 +50,13 @@ namespace ProductDy
              * Take the selected text from the listBox1 as using listBox1.GetItemText(listBox1.SelectedItem)
              * use it in select query to get the corresponding row from the product table, show the row ( Product_Number, description, numberonHand and price)
              * and display them on text boxs
-             
              */
 
-            MessageBox.Show(" Mouse Clicked Method is not implemented");
-
-
+            DataRowView drv = (DataRowView)listBox1.SelectedItem;
+            txtProductNo.Text = drv["Product_Number"].ToString();
+            txtProductDes.Text = drv["Description"].ToString();
+            txtProductOH.Text = drv["Units_On_Hand"].ToString();
+            txtProductPrice.Text = drv["Price"].ToString();
         }
 
 
