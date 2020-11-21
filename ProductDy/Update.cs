@@ -69,6 +69,44 @@ namespace ProductDy
              * example update query: update produc set price = 20 where Product_Number= '2343-43';
              * More Update queries at: https://www.w3schools.com/sql/sql_update.asp
              */
+
+            String constr = DatabaseConnect.connectionString;  // See DatabaseConnect Class in Form1.cs file- bottom
+            SqlConnection con = new SqlConnection(constr);  // create the database connecting
+            SqlCommand cmd = con.CreateCommand(); // Need to execute the query
+            try
+            {
+                //form the SQL insert query using the given data
+                string description = txtProductDes.Text;
+                string unitsOnHand = txtProductOH.Text;
+                string price = txtProductPrice.Text;
+                string productNumber = txtProductNo.Text;
+
+                string query = "UPDATE Product SET Description = '" + description + "', Units_On_Hand = '" + unitsOnHand + "', Price = " + price+ " WHERE Product_Number = '" + productNumber + "'";
+                cmd.CommandText = query;
+                con.Open(); // open the Database connection for insertion when done must close the connection to avoid issues
+                Int32 returnFlag = (Int32)cmd.ExecuteNonQuery(); // execute the query, the function returns 0 if the insertion unsuccessful
+                if (returnFlag > 0)
+                    refreshListBox(con, "Product_Number");
+                else
+                    MessageBox.Show("Something went wrong");
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+            finally
+            {
+                cmd.Dispose();
+                con.Close();
+
+
+            }
+
+
+
+
             MessageBox.Show(" Update Method is not implemented");
 
         }
