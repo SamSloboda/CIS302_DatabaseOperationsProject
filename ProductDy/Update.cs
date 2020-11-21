@@ -76,12 +76,14 @@ namespace ProductDy
             try
             {
                 //form the SQL insert query using the given data
+                DataRowView drv = (DataRowView)listBox1.SelectedItem;
+                string currentProductNumber = drv["Product_Number"].ToString();
                 string description = txtProductDes.Text;
                 string unitsOnHand = txtProductOH.Text;
                 string price = txtProductPrice.Text;
-                string productNumber = txtProductNo.Text;
+                string newProductNumber = txtProductNo.Text;
 
-                string query = "UPDATE Product SET Description = '" + description + "', Units_On_Hand = '" + unitsOnHand + "', Price = " + price+ " WHERE Product_Number = '" + productNumber + "'";
+                string query = "UPDATE Product SET Product_Number = '" + newProductNumber + "',Description = '" + description + "', Units_On_Hand = '" + unitsOnHand + "', Price = " + price+ " WHERE Product_Number = '" + currentProductNumber + "'";
                 cmd.CommandText = query;
                 con.Open(); // open the Database connection for insertion when done must close the connection to avoid issues
                 Int32 returnFlag = (Int32)cmd.ExecuteNonQuery(); // execute the query, the function returns 0 if the insertion unsuccessful
