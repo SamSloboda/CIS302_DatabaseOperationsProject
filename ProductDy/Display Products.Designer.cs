@@ -28,19 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.listView1 = new System.Windows.Forms.ListView();
             this.SuspendLayout();
+            // 
+            // listView1
+            // 
+            this.listView1.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.listView1.FullRowSelect = true;
+            this.listView1.GridLines = true;
+            this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(16, 15);
+            this.listView1.MultiSelect = false;
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(719, 388);
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // Display_Products
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(560, 337);
+            this.ClientSize = new System.Drawing.Size(747, 415);
+            this.Controls.Add(this.listView1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Display_Products";
             this.Text = "Display_Products";
+            this.Load += new System.EventHandler(this.Display_Products_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.ListView listView1;
     }
 }
