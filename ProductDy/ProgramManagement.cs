@@ -46,8 +46,8 @@ namespace ProductDy
             ProductDetails display = new ProductDetails();
             display.ShowDialog();
 
-            Display_Products disp = new Display_Products();
-            disp.ShowDialog();
+            //Display_Products disp = new Display_Products();
+            //disp.ShowDialog();
         }
 
 
