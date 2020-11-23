@@ -68,7 +68,7 @@ namespace ProductDy
     {
 
         // Connection string: Double click on the database(mdf) file in the solution explorer , then look in the preperties section
-        public static String connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Sam Sloboda\\source\\repos\\HW_ProductManagement\\ProductDB.mdf;Integrated Security=True";
+        public static String connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Sam Sloboda\\source\\repos\\HW_ProductManagement\\ProductDy\\ProductDB.mdf;Integrated Security=True";
         DatabaseConnect() { }
         // Connection string for database server
         //String constr = "Server=SBF2D1Z2;Database=PRODUCTDB;Integrated Security=True;";
